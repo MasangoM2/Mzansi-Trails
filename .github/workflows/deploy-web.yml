@@ -1,0 +1,36 @@
+name: Deploy Frontend to Vercel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Turbo
+        run: pnpm turbo run build --filter=web
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.Bov5spBKsa2Cm6InPbei5P7m }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.team_cAUaKXsvrCDH6TKmEE4vAesA }}
+          vercel-project-id: ${{ secrets.prj_IAIVcKZQgIQkfkqzRnXhzOrmoj7z }}
+          working-directory: ./apps/web
