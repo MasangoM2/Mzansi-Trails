@@ -1,0 +1,25 @@
+# .gitignore
+
+# Ignore dependencies
+node_modules/
+.pnpm/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Turbo & build artifacts
+.turbo/
+dist/
+build/
+.next/
+
+# IDE/editor
+.vscode/
+.idea/
+.DS_Store
+
+# OS & misc
+Thumbs.db
