@@ -10,12 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm typecheck
@@ -28,7 +31,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
-      - uses: amondnet/vercel-action@v25
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
@@ -36,15 +41,18 @@ jobs:
           vercel-args: '--prod'
           working-directory: apps/web
 
+      - name: Check Vercel output folder
+        run: ls -la apps/web
+
   deploy-backend:
     needs: install-build-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploy to Render
-  run: |
-    if [ -z "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
-      echo "RENDER_DEPLOY_HOOK is not set. Skipping deploy."
-      exit 1
-    fi
-    curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+            echo "RENDER_DEPLOY_HOOK is not set. Skipping deploy."
+            exit 1
+          fi
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
