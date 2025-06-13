@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "projects": {
-    "mzansi-trails-web": {
-      "rootDirectory": "apps/web"
-    }
-  }
+  "buildCommand": "pnpm turbo run build --filter=web",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
 }
