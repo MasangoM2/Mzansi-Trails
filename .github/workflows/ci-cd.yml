@@ -42,4 +42,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploy to Render
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+  run: |
+    if [ -z "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+      echo "RENDER_DEPLOY_HOOK is not set. Skipping deploy."
+      exit 1
+    fi
+    curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
