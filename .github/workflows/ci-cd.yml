@@ -1,4 +1,3 @@
-
 name: CI/CD Pipeline
 
 on:
@@ -28,13 +27,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
+      - uses: actions/checkout@v3
       - uses: amondnet/vercel-action@v25
         with:
-          vercel-token: ${{ secrets.Bov5spBKsa2Cm6InPbei5P7m }}
-          vercel-org-id: ${{ secrets.team_cAUaKXsvrCDH6TKmEE4vAesA }}
-          vercel-project-id: ${{ secrets.prj_IAIVcKZQgIQkfkqzRnXhzOrmoj7z }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
           working-directory: apps/web
-          prod: true
 
   deploy-backend:
     needs: install-build-test
