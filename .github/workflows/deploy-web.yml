@@ -23,6 +23,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Push Prisma schema to DB
+        run: npx prisma db push
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Build Turbo
         run: pnpm turbo run build --filter=web
 
