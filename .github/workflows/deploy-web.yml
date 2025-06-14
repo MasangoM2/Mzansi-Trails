@@ -30,6 +30,7 @@ jobs:
         run: npx prisma db push
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Build Turbo
         run: pnpm turbo run build --filter=web
