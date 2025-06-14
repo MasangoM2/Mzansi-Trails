@@ -44,6 +44,11 @@ jobs:
       - name: Check Vercel output folder
         run: ls -la apps/web
 
+      - name: Check if vercel.json exists
+        run: |
+             ls -al apps/web
+             cat apps/web/vercel.json
+
   deploy-backend:
     needs: install-build-test
     runs-on: ubuntu-latest
