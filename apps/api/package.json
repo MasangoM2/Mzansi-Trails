@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "ts-node-dev src/main.ts",
+    "lint": "eslint . --ext .ts,.tsx,.js",
     "build": "tsc",
     "start": "node dist/main.js"
   },
@@ -19,8 +20,3 @@
     "typescript": "^5.8.3"
   }
 }
-
-"scripts": {
-  "lint": "eslint . --ext .ts,.tsx,.js"
-}
-
