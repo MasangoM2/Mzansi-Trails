@@ -32,27 +32,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-          working-directory: apps/web
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
 
-      - name: Check Vercel output folder
-        run: ls -la apps/web
-
-      - name: Check if vercel.json exists
+      - name: Check contents of apps/web
         run: |
-             ls -al apps/web
-             cat apps/web/vercel.json
+          echo "Contents of apps/web:"
+          ls -la apps/web
+          echo "vercel.json content:"
+          cat apps/web/vercel.json
 
-      - name: Deploy with Vercel CLI manually
+      - name: Deploy to Vercel (apps/web)
         run: |
-              npm install -g vercel@latest
-    vercel --cwd apps/web --prod --confirm --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --cwd apps/web --prod --confirm --token=${{ secrets.VERCEL_TOKEN }}
 
   deploy-backend:
     needs: install-build-test
