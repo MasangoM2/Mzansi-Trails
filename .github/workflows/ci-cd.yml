@@ -43,8 +43,7 @@ jobs:
           cat apps/web/vercel.json
 
       - name: Deploy to Vercel (apps/web)
-        run: |
-          vercel deploy --cwd apps/web --prod --confirm --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --cwd apps/web --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
 
   deploy-backend:
     needs: install-build-test
