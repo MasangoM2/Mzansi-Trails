@@ -49,6 +49,11 @@ jobs:
              ls -al apps/web
              cat apps/web/vercel.json
 
+      - name: Deploy with Vercel CLI manually
+        run: |
+              npm install -g vercel@latest
+    vercel --cwd apps/web --prod --confirm --token=${{ secrets.VERCEL_TOKEN }}
+
   deploy-backend:
     needs: install-build-test
     runs-on: ubuntu-latest
