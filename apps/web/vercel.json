@@ -1,6 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "pnpm turbo run build --filter=web",
-  "outputDirectory": ".next",
-  "framework": "nextjs"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
