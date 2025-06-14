@@ -15,7 +15,11 @@
   "devDependencies": {
     "@types/node": "^24.0.1",
     "@types/react": "19.1.8",
+    "prisma": "^6.9.0",
     "turbo": "^1.10.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0"
   }
 }
