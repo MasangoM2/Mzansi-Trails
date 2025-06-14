@@ -1,8 +1,15 @@
 {
-  "framework": "vite",
-  "buildCommand": "pnpm build",
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm install && pnpm build",
-  "outputDirectory": "dist",
-  "ignoreCommand": "echo 'Skipping for now'"
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
