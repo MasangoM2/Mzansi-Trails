@@ -21,7 +21,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install
 
       - name: Build Turbo
         run: pnpm turbo run build --filter=web
