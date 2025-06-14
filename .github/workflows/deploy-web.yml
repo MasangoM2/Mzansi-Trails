@@ -20,8 +20,21 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Check lockfile sync
+        run: pnpm install --frozen-lockfile
+
+      - name: Install dependencies (safe fallback)
+        if: failure()  # Only runs if the frozen-lockfile check failed
+        run: |
+          echo "⚠️ Lockfile is out of sync. Installing anyway for now..."
+          pnpm install --no-frozen-lockfile
+
+      - name: Warn about lockfile mismatch
+        run: |
+          git diff --exit-code pnpm-lock.yaml || {
+            echo "❌ pnpm-lock.yaml is not committed or out of sync with package.json. Please update and commit it.";
+            exit 1;
+          }
 
       - name: Generate Prisma Client
         run: npx prisma generate
