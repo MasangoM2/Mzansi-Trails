@@ -1,0 +1,31 @@
+name: Prisma DB Push
+
+on:
+  push:
+    branches:
+      - main       # or your default branch name
+
+jobs:
+  db-push:
+    runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Push Prisma schema to DB
+        run: npx prisma db push --accept-data-loss
