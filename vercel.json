@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "mzansi-trails-web": {
+      "rootDirectory": "apps/web"
+    },
+    "api": {
+      "rootDirectory": "apps/api"
+    }
+  }
+}
