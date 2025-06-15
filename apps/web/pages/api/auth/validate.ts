@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     if (!user) return res.status(401).json({ error: "User not found" });
 
     res.json({ user: { id: user.id, email: user.email, role: user.role } });
-  } catch (e) {
+  } catch {
     res.status(401).json({ error: "Invalid token" });
   }
 }
