@@ -54,7 +54,7 @@ jobs:
         run: pnpm turbo run build --filter=web
 
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v29
+        uses: amondnet/vercel-action@v1
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
